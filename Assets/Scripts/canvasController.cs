@@ -5,18 +5,28 @@ using UnityEngine.UI;
 
 public class canvasController : MonoBehaviour
 {
-    Text scoreText;
+    [SerializeField]Text scoreText;
     collisionScores cScores;
+
     private void Awake()
     {
         cScores = FindObjectOfType<collisionScores>();
-        scoreText = GetComponentInChildren<Text>();
     }
     private void OnEnable()
     {
         cScores.OnScoreChange += ScoreChange;
     }
+    private void OnDisable()
+    {
+        cScores.OnScoreChange -= ScoreChange;
+    }
     public void ScoreChange(int score) {
-        scoreText.text = "SCORE: " + score + "/50";    
+        int actualScore = int.Parse(scoreText.text);
+        if (actualScore + score < 0) actualScore = 0;
+        else
+        {
+            actualScore += score;
+        }
+        scoreText.text = actualScore.ToString();    
     }
 }

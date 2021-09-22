@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Triangle : MonoBehaviour, ITriangle
 {
+    [SerializeField] int modifier;
     public int ModifyScore() {
         return modifier;
     }
-    [SerializeField] int modifier; 
-
 }
