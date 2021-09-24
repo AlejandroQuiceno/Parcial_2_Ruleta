@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class SpinController : MonoBehaviour
 {
     int state = 0; // state 0 cuando la ruleta esta quieta, state 1 cuando esta girando, state 2 cuando se gana
     float timer = 0;
+    private canvasController score;
+    public GameObject winPanel;
     [SerializeField] float SpinTime;
     [SerializeField] AnimationCurve animation;
     public event UnityAction OnStopSpining;
+    private void Awake()
+    {
+        score = FindObjectOfType<canvasController>();
+    }
     private void Start()
     {
         SpinTime= Random.Range(3.4f, 5);
@@ -20,6 +27,13 @@ public class SpinController : MonoBehaviour
         {
             OnSpinPushed();
         }
+        if (score.aScore >= 50) {
+            state = 2;
+            winPanel.SetActive(true);
+        }
+    }
+    public void RetryButtonPushed() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void OnSpinPushed()
     {
