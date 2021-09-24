@@ -7,6 +7,7 @@ public class canvasController : MonoBehaviour
 {
     [SerializeField]Text scoreText;
     collisionScores cScores;
+    public int aScore;
 
     private void Awake()
     {
@@ -27,6 +28,7 @@ public class canvasController : MonoBehaviour
         {
             actualScore += score;
         }
-        scoreText.text = actualScore.ToString();    
+        scoreText.text = actualScore.ToString();
+        aScore = actualScore;
     }
 }
