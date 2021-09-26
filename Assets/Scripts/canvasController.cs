@@ -8,7 +8,6 @@ public class canvasController : MonoBehaviour
     [SerializeField]Text scoreText;
     collisionScores cScores;
     public int aScore;
-
     private void Awake()
     {
         cScores = FindObjectOfType<collisionScores>();
