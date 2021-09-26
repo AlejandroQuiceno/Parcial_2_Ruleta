@@ -16,22 +16,21 @@ public class collisionScores : MonoBehaviour
     }
     private void OnEnable()
     {
-        spinController.OnStopSpining += OnActivate;
+        spinController.OnStopSpining += Activate;
     }
     private void OnDisable()
     {
-        spinController.OnStopSpining -= OnActivate;
+        spinController.OnStopSpining -= Activate;
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         ITriangle triangle = collision.GetComponent<Triangle>();
         if (triangle != null && triggeractivated) {
             OnScoreChange?.Invoke(triangle.ModifyScore());
-            Debug.Log("Detectecto la colision y paro");
             triggeractivated = false;
         }
     }
-    public void OnActivate ()
+    public void Activate()
     {
         triggeractivated = true;
     }
